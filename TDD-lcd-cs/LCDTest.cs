@@ -7,65 +7,83 @@ namespace TDD_lcd_cs
         [Fact]
         public void CanShowOneDigit()
         {
-            const string one = "  \n" +
-                               " |\n" +
+            const string one = "  \r\n" +
+                               " |\r\n" +
                                " |";
 
             Assert.Equal(one, LcdNumbers.Show(1));
 
-            const string two = " _ \n" +
-                               " _|\n" +
+            const string two = " _ \r\n" +
+                               " _|\r\n" +
                                "|_ ";
 
             Assert.Equal(two, LcdNumbers.Show(2));
 
-            const string three = " _ \n" +
-                                 " _|\n" +
+            const string three = " _ \r\n" +
+                                 " _|\r\n" +
                                  " _|";
 
             Assert.Equal(three, LcdNumbers.Show(3));
 
-            const string four = "   \n" +
-                                "|_|\n" +
+            const string four = "   \r\n" +
+                                "|_|\r\n" +
                                 "  |";
 
             Assert.Equal(four, LcdNumbers.Show(4));
 
-            const string five = " _ \n" +
-                                "|_ \n" +
+            const string five = " _ \r\n" +
+                                "|_ \r\n" +
                                 " _|";
 
             Assert.Equal(five, LcdNumbers.Show(5));
 
-            const string six = " _ \n" +
-                               "|_ \n" +
+            const string six = " _ \r\n" +
+                               "|_ \r\n" +
                                "|_|";
 
             Assert.Equal(six, LcdNumbers.Show(6));
 
-            const string seven = " _ \n" +
-                                 "  |\n" +
+            const string seven = " _ \r\n" +
+                                 "  |\r\n" +
                                  "  |";
 
             Assert.Equal(seven, LcdNumbers.Show(7));
 
-            const string eight = " _ \n" +
-                                 "|_|\n" +
+            const string eight = " _ \r\n" +
+                                 "|_|\r\n" +
                                  "|_|";
 
             Assert.Equal(eight, LcdNumbers.Show(8));
 
-            const string nine = " _ \n" +
-                                "|_|\n" +
+            const string nine = " _ \r\n" +
+                                "|_|\r\n" +
                                 " _|";
 
             Assert.Equal(nine, LcdNumbers.Show(9));
 
-            const string zero = " _ \n" +
-                                "| |\n" +
+            const string zero = " _ \r\n" +
+                                "| |\r\n" +
                                 "|_|";
 
             Assert.Equal(zero, LcdNumbers.Show(0));
         }
+
+
+        [Fact]
+        public void CanShowTwoOrMoreDigits()
+        {
+            const string twelve = "   _ \r\n" +
+                                  " | _|\r\n" +
+                                  " ||_ ";
+
+            Assert.Equal(twelve, LcdNumbers.Show(12));
+
+            const string allDigits = "   _  _     _  _  _  _  _  _ \r\n" +
+                                     " | _| _||_||_ |_   ||_||_|| |\r\n" +
+                                     " ||_  _|  | _||_|  ||_| _||_|";
+            Assert.Equal(allDigits, LcdNumbers.Show(1234567890));
+
+        }
     }
+
 }
