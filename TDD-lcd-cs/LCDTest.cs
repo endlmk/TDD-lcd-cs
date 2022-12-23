@@ -21,7 +21,7 @@ namespace TDD_lcd_cs
                                "|  \r\n" +
                                " - ";
 
-            //Assert.Equal(two, LcdNumbers.Show(2));
+            Assert.Equal(two, LcdNumbers.Show(2));
 
             //const string three = " _ \r\n" +
             //                     " _|\r\n" +
@@ -72,19 +72,21 @@ namespace TDD_lcd_cs
             //Assert.Equal(zero, LcdNumbers.Show(0));
         }
         
-        [Fact(Skip = "TBD: change specification")]
+        [Fact]
         public void CanShowTwoOrMoreDigits()
         {
-            const string twelve = "   _ \r\n" +
-                                  " | _|\r\n" +
-                                  " ||_ ";
+            const string twelve = "    - \r\n" +
+                                  "  |  |\r\n" +
+                                  "    - \r\n" +
+                                  "  ||  \r\n" +
+                                  "    - ";
 
             Assert.Equal(twelve, LcdNumbers.Show(12));
 
-            const string allDigits = "   _  _     _  _  _  _  _  _ \r\n" +
-                                     " | _| _||_||_ |_   ||_||_|| |\r\n" +
-                                     " ||_  _|  | _||_|  ||_| _||_|";
-            Assert.Equal(allDigits, LcdNumbers.Show(1234567890));
+            //const string allDigits = "   _  _     _  _  _  _  _  _ \r\n" +
+            //                         " | _| _||_||_ |_   ||_||_|| |\r\n" +
+            //                         " ||_  _|  | _||_|  ||_| _||_|";
+            //Assert.Equal(allDigits, LcdNumbers.Show(1234567890));
 
         }
     }
