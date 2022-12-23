@@ -68,6 +68,13 @@ namespace LCD
                 " _|"
             }
         };
+
+        // 7seg lcd
+        //  - 
+        // | |
+        //  -
+        // | |
+        //  -
         
         public static string Show(int number)
         {
