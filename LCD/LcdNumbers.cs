@@ -5,14 +5,14 @@ namespace LCD
     public class LcdNumbers
     {
         // 7seg lcd
-        //  -1   <- partH1
-        //1| |2  <- partV12 * height
-        //  -2   <- partH2
-        //3| |4  <- partV34 * height
-        //  -3   <- partH3
+        //   -H1   <- partH1
+        //V1| |V2  <- partV12 * height
+        //   -H2   <- partH2
+        //V3| |V4  <- partV34 * height
+        //   -H3   <- partH3
         
-        // 1 -> [V:[2, 4], H:[]]
-        // 2 -> [V:[2, 3], H:[1, 2, 3]]
+        // 1 -> [V2, V4]
+        // 2 -> [H1, V2, H2, V3, H3]]
 
 
         public static string Show(int number, int width = 1, int height = 1)
@@ -26,16 +26,15 @@ namespace LCD
                 digits.Add(i);
             }
 
-            int rows = height * 2 + 3;
-
             // map number chars
-            var lcdCharsList = digits.Select(x => ToLcdChars(x, width, height));
-
+            var lcdCharsList = digits.Select(x => ToLcdChars(x, width, height)).ToList();
+            
             // concat each number chars
             var result = new StringBuilder();
+            var rows = lcdCharsList.First().Count;
             for (var i = 0; i < rows; ++i)
             {
-                result.Append(lcdCharsList.Aggregate(new StringBuilder(), (added, next) => added.Append(next[i])).ToString());
+                result.Append(lcdCharsList.Aggregate(new StringBuilder(), (added, next) => added.Append(next[i])));
  
                 if (i != rows - 1)
                 {
@@ -48,48 +47,36 @@ namespace LCD
 
         private static List<String> ToLcdChars(int n, int width, int height)
         {
-            Dictionary<char, List<int>> numConstruct = null;
-            if (n == 1)
+            List<string>[] segComponentList =
             {
-                numConstruct = new Dictionary<char, List<int>>
-                {
-                    { 'V', new List<int> { 2, 4 } },
-                    { 'H', new List<int>() },
-                };
-            }
-            else if(n == 2)
-            {
-                numConstruct = new Dictionary<char, List<int>>
-                {
-                    { 'V', new List<int> { 2, 3 } },
-                    { 'H', new List<int> { 1, 2, 3 } },
-                };
-            }
+                new List<string>(),
+                new List<string>{ "V2", "V4"},
+                new List<string>{ "H1", "V2", "H2", "V3", "H3" }
+            };
 
-            var partH1 = ' ' + new string((numConstruct['H'].Contains(1) ? '-' : ' '), width) + ' ';
-            var partV12 = (numConstruct['V'].Contains(1) ? '|' : ' ') + new string(' ', width) +
-                          (numConstruct['V'].Contains(2) ? '|' : ' ');
-            var partH2 = ' ' + new string((numConstruct['H'].Contains(2) ? '-' : ' '), width) + ' ';
+            var component = segComponentList[n];
 
-            var partV34 = (numConstruct['V'].Contains(3) ? '|' : ' ') + new string(' ', width) +
-                          (numConstruct['V'].Contains(4) ? '|' : ' ');
-            var partH3 = ' ' + new string((numConstruct['H'].Contains(3) ? '-' : ' '), width) + ' ';
-
-            var result = new List<String>();
-
-            result.Add(partH1);
-            for (var i = 0; i < height; i++)
-            {
-                result.Add(partV12);
-            }
-            result.Add(partH2);
-            for (var i = 0; i < height; i++)
-            {
-                result.Add(partV34);
-            }
-            result.Add(partH3);
+            var result = new List<String> { CreatePartH(width, component, "H1") };
+            result.AddRange(Enumerable.Repeat(CreatePartV(width, component, "V1", "V2"), height));
+            result.Add(CreatePartH(width, component, "H2"));
+            result.AddRange(Enumerable.Repeat(CreatePartV(width, component, "V3", "V4"), height));
+            result.Add(CreatePartH(width, component, "H3"));
 
             return result;
+        }
+
+        private static string CreatePartH(int width, List<string> component, string p)
+        {
+            return ' ' + 
+                   new string(component.Contains(p) ? '-' : ' ', width) +
+                   ' ';
+        }
+
+        private static string CreatePartV(int width, List<string> component, string p1, string p2)
+        {
+            return (component.Contains(p1) ? '|' : ' ') +
+                   new string(' ', width) +
+                   (component.Contains(p2) ? '|' : ' ');
         }
     }
 }
