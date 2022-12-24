@@ -31,10 +31,16 @@ namespace LCD
 
         private static readonly List<SegPart>[] SegComponentList =
         {
-            new List<SegPart>(),
-            new List<SegPart>{ V2, V4},
-            new List<SegPart>{ H1, V2, H2, V3, H3 },
-            new List<SegPart>{ H1, V2, H2, V4, H3 }
+            new() { H1, V1, V2, V3, V4, H3 },
+            new() { V2, V4},
+            new() { H1, V2, H2, V3, H3 },
+            new() { H1, V2, H2, V4, H3 },
+            new() { V1, V2, H2, V4 },
+            new() { H1, V1, H2, V4, H3 },
+            new() { H1, V1, H2, V3, V4, H3 },
+            new() { H1, V2, V4 },
+            new() { H1, V1, V2, H2, V3, V4, H3 },
+            new() { H1, V1, V2, H2, V4, H3 },
         };
 
 

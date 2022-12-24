@@ -31,47 +31,61 @@ namespace TDD_lcd_cs
 
             Assert.Equal(three, LcdNumbers.Show(3));
 
-            //const string four = "   \r\n" +
-            //                    "|_|\r\n" +
-            //                    "  |";
+            const string four = "   \r\n" +
+                                "| |\r\n" +
+                                " - \r\n" +
+                                "  |\r\n" +
+                                "   ";
 
-            //Assert.Equal(four, LcdNumbers.Show(4));
+            Assert.Equal(four, LcdNumbers.Show(4));
 
-            //const string five = " _ \r\n" +
-            //                    "|_ \r\n" +
-            //                    " _|";
+            const string five = " - \r\n" +
+                                "|  \r\n" +
+                                " - \r\n" +
+                                "  |\r\n" +
+                                " - ";
 
-            //Assert.Equal(five, LcdNumbers.Show(5));
+            Assert.Equal(five, LcdNumbers.Show(5));
 
-            //const string six = " _ \r\n" +
-            //                   "|_ \r\n" +
-            //                   "|_|";
+            const string six = " - \r\n" +
+                               "|  \r\n" +
+                               " - \r\n" +
+                               "| |\r\n" +
+                               " - ";
 
-            //Assert.Equal(six, LcdNumbers.Show(6));
+            Assert.Equal(six, LcdNumbers.Show(6));
 
-            //const string seven = " _ \r\n" +
-            //                     "  |\r\n" +
-            //                     "  |";
+            const string seven = " - \r\n" +
+                                 "  |\r\n" +
+                                 "   \r\n" +
+                                 "  |\r\n" +
+                                 "   ";
 
-            //Assert.Equal(seven, LcdNumbers.Show(7));
+            Assert.Equal(seven, LcdNumbers.Show(7));
 
-            //const string eight = " _ \r\n" +
-            //                     "|_|\r\n" +
-            //                     "|_|";
+            const string eight = " - \r\n" +
+                                 "| |\r\n" +
+                                 " - \r\n" +
+                                 "| |\r\n" +
+                                 " - ";
 
-            //Assert.Equal(eight, LcdNumbers.Show(8));
+            Assert.Equal(eight, LcdNumbers.Show(8));
 
-            //const string nine = " _ \r\n" +
-            //                    "|_|\r\n" +
-            //                    " _|";
+            const string nine = " - \r\n" +
+                                "| |\r\n" +
+                                " - \r\n" +
+                                "  |\r\n" +
+                                " - ";
 
-            //Assert.Equal(nine, LcdNumbers.Show(9));
+            Assert.Equal(nine, LcdNumbers.Show(9));
 
-            //const string zero = " _ \r\n" +
-            //                    "| |\r\n" +
-            //                    "|_|";
+            const string zero = " - \r\n" +
+                                "| |\r\n" +
+                                "   \r\n" +
+                                "| |\r\n" +
+                                " - ";
 
-            //Assert.Equal(zero, LcdNumbers.Show(0));
+            Assert.Equal(zero, LcdNumbers.Show(0));
         }
         
         [Fact]
@@ -85,10 +99,12 @@ namespace TDD_lcd_cs
 
             Assert.Equal(twelve, LcdNumbers.Show(12));
 
-            //const string allDigits = "   _  _     _  _  _  _  _  _ \r\n" +
-            //                         " | _| _||_||_ |_   ||_||_|| |\r\n" +
-            //                         " ||_  _|  | _||_|  ||_| _||_|";
-            //Assert.Equal(allDigits, LcdNumbers.Show(1234567890));
+            const string allDigits = "    -  -     -  -  -  -  -  - \r\n" +
+                                     "  |  |  || ||  |    || || || |\r\n" +
+                                     "    -  -  -  -  -     -  -    \r\n" +
+                                     "  ||    |  |  || |  || |  || |\r\n" +
+                                     "    -  -     -  -     -  -  - ";
+            Assert.Equal(allDigits, LcdNumbers.Show(1234567890));
 
         }
     }
