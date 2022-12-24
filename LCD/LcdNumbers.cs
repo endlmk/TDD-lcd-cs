@@ -2,7 +2,7 @@
 
 namespace LCD
 {
-    public class LcdNumbers
+    public static class LcdNumbers
     {
         // 7seg lcd
         //   -H1   <- partH1
