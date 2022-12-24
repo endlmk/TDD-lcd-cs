@@ -10,9 +10,32 @@ namespace LCD
         //   -H2   <- partH2
         //V3| |V4  <- partV34 * height
         //   -H3   <- partH3
-        
-        // 1 -> [V2, V4]
-        // 2 -> [H1, V2, H2, V3, H3]]
+
+        enum SegPart
+        {
+            V1,
+            V2,
+            V3,
+            V4,
+            H1,
+            H2,
+            H3,
+        }
+        private const SegPart V1 = SegPart.V1;
+        private const SegPart V2 = SegPart.V2;
+        private const SegPart V3 = SegPart.V3;
+        private const SegPart V4 = SegPart.V4;
+        private const SegPart H1 = SegPart.H1;
+        private const SegPart H2 = SegPart.H2;
+        private const SegPart H3 = SegPart.H3;
+
+        private static readonly List<SegPart>[] SegComponentList =
+        {
+            new List<SegPart>(),
+            new List<SegPart>{ V2, V4},
+            new List<SegPart>{ H1, V2, H2, V3, H3 },
+            new List<SegPart>{ H1, V2, H2, V4, H3 }
+        };
 
 
         public static string Show(int number, int width = 1, int height = 1)
@@ -47,32 +70,26 @@ namespace LCD
 
         private static List<String> ToLcdChars(int n, int width, int height)
         {
-            List<string>[] segComponentList =
-            {
-                new List<string>(),
-                new List<string>{ "V2", "V4"},
-                new List<string>{ "H1", "V2", "H2", "V3", "H3" }
-            };
+            var component = SegComponentList[n];
 
-            var component = segComponentList[n];
-
-            var result = new List<String> { CreatePartH(width, component, "H1") };
-            result.AddRange(Enumerable.Repeat(CreatePartV(width, component, "V1", "V2"), height));
-            result.Add(CreatePartH(width, component, "H2"));
-            result.AddRange(Enumerable.Repeat(CreatePartV(width, component, "V3", "V4"), height));
-            result.Add(CreatePartH(width, component, "H3"));
+            var result = new List<String> { CreatePartH(width, component, H1) };
+            result.AddRange(Enumerable.Repeat(CreatePartV(width, component, V1, V2), height));
+            result.Add(CreatePartH(width, component, H2));
+            result.AddRange(Enumerable.Repeat(CreatePartV(width, component, V3, V4), height));
+            result.Add(CreatePartH(width, component, H3));
 
             return result;
         }
 
-        private static string CreatePartH(int width, List<string> component, string p)
+
+        private static string CreatePartH(int width, List<SegPart> component, SegPart p)
         {
             return ' ' + 
                    new string(component.Contains(p) ? '-' : ' ', width) +
                    ' ';
         }
 
-        private static string CreatePartV(int width, List<string> component, string p1, string p2)
+        private static string CreatePartV(int width, List<SegPart> component, SegPart p1, SegPart p2)
         {
             return (component.Contains(p1) ? '|' : ' ') +
                    new string(' ', width) +

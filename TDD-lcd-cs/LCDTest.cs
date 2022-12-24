@@ -23,11 +23,13 @@ namespace TDD_lcd_cs
 
             Assert.Equal(two, LcdNumbers.Show(2));
 
-            //const string three = " _ \r\n" +
-            //                     " _|\r\n" +
-            //                     " _|";
+            const string three = " - \r\n" +
+                                 "  |\r\n" +
+                                 " - \r\n" +
+                                 "  |\r\n" +
+                                 " - ";
 
-            //Assert.Equal(three, LcdNumbers.Show(3));
+            Assert.Equal(three, LcdNumbers.Show(3));
 
             //const string four = "   \r\n" +
             //                    "|_|\r\n" +
