@@ -107,6 +107,59 @@ namespace TDD_lcd_cs
             Assert.Equal(allDigits, LcdNumbers.Show(1234567890));
 
         }
+
+        [Fact]
+        public void CanShowWidth3Height2()
+        {
+            const string two = " --- \r\n" +
+                               "    |\r\n" +
+                               "    |\r\n" +
+                               " --- \r\n" +
+                               "|    \r\n" +
+                               "|    \r\n" +
+                               " --- ";
+
+            Assert.Equal(two, LcdNumbers.Show(2, 3, 2));
+
+            const string thirty = " ---  --- \r\n" +
+                                  "    ||   |\r\n" +
+                                  "    ||   |\r\n" +
+                                  " ---      \r\n" +
+                                  "    ||   |\r\n" +
+                                  "    ||   |\r\n" +
+                                  " ---  --- ";
+
+            Assert.Equal(thirty, LcdNumbers.Show(30, 3, 2));
+        }
+
+        [Fact]
+        public void CanShowWidth5Height3()
+        {
+            const string eight = " ----- \r\n" + 
+                                 "|     |\r\n" +
+                                 "|     |\r\n" +
+                                 "|     |\r\n" +
+                                 " ----- \r\n" +
+                                 "|     |\r\n" +
+                                 "|     |\r\n" +
+                                 "|     |\r\n" +
+                                 " ----- ";
+
+            Assert.Equal(eight, LcdNumbers.Show(8, 5, 3));
+
+            const string ninetySeven = " -----  ----- \r\n" +
+                                       "|     |      |\r\n" +
+                                       "|     |      |\r\n" +
+                                       "|     |      |\r\n" +
+                                       " -----        \r\n" +
+                                       "      |      |\r\n" +
+                                       "      |      |\r\n" +
+                                       "      |      |\r\n" +
+                                       " -----        ";
+
+            Assert.Equal(ninetySeven, LcdNumbers.Show(97, 5, 3));
+
+        }
     }
 
 }
